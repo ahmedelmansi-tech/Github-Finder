@@ -1,16 +1,16 @@
 import { meta } from "@eslint/js";
-import { useEffect, useContext } from "react";
+import { useContext } from "react";
 import Spinner from "../layout/Spinner";
 import UserItem from "./UserItem";
 // GITHUBPROVIDER
 
 import GithubContext from "../../context/githubContext/GithubContext";
 const UserResults = () => {
-  const { users, loading, getUsers } = useContext(GithubContext);
+  const { users, loading } = useContext(GithubContext);
 
-  useEffect(() => {
-    getUsers();
-  }, []);
+  // useEffect(() => {
+  //   getUsers();
+  // }, []);
 
   if (loading) {
     return <Spinner />;
