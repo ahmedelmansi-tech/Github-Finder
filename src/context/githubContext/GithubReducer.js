@@ -16,6 +16,12 @@ const usersReducer = (state, action) => {
         ...state,
         users: [],
       };
+    case "GET_PROFILE":
+      return {
+        ...state,
+        profile: action.payload,
+        loading: false,
+      };
     default:
       return state;
   }

@@ -9,6 +9,7 @@ const githubToken = import.meta.env.VITE_APP_GITHUB_TOKEN;
 export const GithubProvider = ({ children }) => {
   const initialStates = {
     users: [],
+    profile: {},
     loading: false,
   };
 
@@ -53,6 +54,33 @@ export const GithubProvider = ({ children }) => {
     });
   };
 
+  // Profile
+
+  const getProfile = async (par) => {
+    handleLoading();
+
+    let data = await fetch(`${endpointURL}users/${par}`, {
+      headers: {
+        Authorization: `token ${githubToken}`,
+        Accept: "application/vnd.github+json",
+      },
+    });
+
+    if (data.status === 404) {
+      window.location = "/notfound";
+    } else {
+      let profileData = await data.json();
+
+      // DATA PER PROFILE
+      // console.log(profileData);
+
+      dispatch({
+        type: "GET_PROFILE",
+        payload: profileData,
+      });
+    }
+  };
+
   const handleLoading = () => dispatch({ type: "SET_LOADING" });
 
   // CLEAR SEARCH
@@ -67,6 +95,8 @@ export const GithubProvider = ({ children }) => {
       value={{
         users: state.users,
         loading: state.loading,
+        profile: state.profile,
+        getProfile,
         searchUsers,
         clearSearch,
       }}

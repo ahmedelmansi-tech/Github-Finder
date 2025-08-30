@@ -2,9 +2,9 @@ import { meta } from "@eslint/js";
 import { useContext } from "react";
 import Spinner from "../layout/Spinner";
 import UserItem from "./UserItem";
-// GITHUBPROVIDER
-
+// CONTEXT SS
 import GithubContext from "../../context/githubContext/GithubContext";
+
 const UserResults = () => {
   const { users, loading } = useContext(GithubContext);
 
