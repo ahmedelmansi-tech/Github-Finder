@@ -10,6 +10,7 @@ export const GithubProvider = ({ children }) => {
   const initialStates = {
     users: [],
     profile: {},
+    repos: [],
     loading: false,
   };
 
@@ -81,6 +82,37 @@ export const GithubProvider = ({ children }) => {
     }
   };
 
+  // REPOS
+
+  const getProfileRepos = async (par) => {
+    handleLoading();
+
+    const params = new URLSearchParams({
+      sort: "created",
+      per_page: 5,
+      // direction: "asc",
+    });
+
+    // asc & desc
+
+    let data = await fetch(`${endpointURL}users/${par}/repos?${params}`, {
+      headers: {
+        Authorization: `token ${githubToken}`,
+        Accept: "application/vnd.github+json",
+      },
+    });
+
+    if (data.status === 404) {
+      window.location = "/notfound";
+    } else {
+      let profileRepoData = await data.json();
+      dispatch({
+        type: "GET_REPOS",
+        payload: profileRepoData,
+      });
+    }
+  };
+
   const handleLoading = () => dispatch({ type: "SET_LOADING" });
 
   // CLEAR SEARCH
@@ -96,6 +128,8 @@ export const GithubProvider = ({ children }) => {
         users: state.users,
         loading: state.loading,
         profile: state.profile,
+        repos: state.repos,
+        getProfileRepos,
         getProfile,
         searchUsers,
         clearSearch,

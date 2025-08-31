@@ -4,12 +4,15 @@ import { useContext, useEffect } from "react";
 import Spinner from "../components/layout/Spinner";
 import { Link } from "react-router-dom";
 import { FaCodepen, FaUserFriends, FaUsers, FaStore } from "react-icons/fa";
+import Repo from "../components/reposfile/Repo";
 const Profile = () => {
   const { person } = useParams();
-  const { profile, getProfile, loading, type } = useContext(GithubContext);
+  const { profile, getProfile, loading, type, getProfileRepos, repos } =
+    useContext(GithubContext);
 
   useEffect(() => {
     getProfile(person);
+    getProfileRepos(person);
   }, []);
 
   console.log(profile);
@@ -78,7 +81,7 @@ const Profile = () => {
               </a>
             </div>
           </div>
-          <div className="w-full rounded-lg shadow-md stat bg-base-200 mb-4">
+          <div className="w-full grid grid-cols-3 gap-1.5 rounded-lg shadow-md stat bg-base-200 mb-4">
             {location && (
               <div className="stat text-zinc-600">
                 <div className="stat-title text-md">Location</div>
@@ -155,6 +158,8 @@ const Profile = () => {
             </div>
           </div>
         </div>
+
+        <Repo repoList={repos} />
       </div>
     </>
   );
