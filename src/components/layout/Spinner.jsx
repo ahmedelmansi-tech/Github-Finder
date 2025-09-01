@@ -7,7 +7,7 @@ const Spinner = () => {
         width={200}
         src={loadingSpinner}
         alt="Loading..."
-        className="sm:w150"
+        className="sm:w-150"
       />
     </div>
   );
