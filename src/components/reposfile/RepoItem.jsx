@@ -22,16 +22,16 @@ const RepoItem = ({ repItem }) => {
         <p className="mb-3">{description}</p>
         {/* Badges */}
         <div>
-          <div className="mr-3 badge badge-info badge-lg">
+          <div className="mr-3 badge badge-info badge-md">
             <FaEye /> {watchers_count}
           </div>
-          <div className="mr-3 badge badge-success badge-lg">
+          <div className="mr-3 badge badge-success badge-md">
             <FaStar /> {stargazers_count}
           </div>
-          <div className="mr-3 badge badge-error badge-lg">
+          <div className="mr-3 badge badge-error badge-md">
             <FaInfo /> {open_issues}
           </div>
-          <div className="mr-3 badge badge-warning badge-lg">
+          <div className="mr-3 badge badge-warning badge-md">
             <FaUtensils /> {forks_count}
           </div>
         </div>
